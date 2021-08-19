@@ -1,0 +1,24 @@
+version: '2.1'
+services:
+
+  fevo-service:
+    image: fevo/fevo:0.0.1-SNAPSHOT
+    ports:
+      - "8071:8071"
+    environment:
+      PROFILE: "default"
+    networks:
+      - backend
+
+  redisserver:
+    image: redis:alpine
+    ports:
+      - 6379:6379
+    networks:
+      backend:
+        aliases:
+          - "redis"
+
+networks:
+  backend:
+    driver: bridge
